@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 // import "./Home.css";
 import { CharList } from "../CharList/CharList";
 import { Char } from "../Char/Char";
+import { Loading } from "../Loading/Loading";
 // import { Loading } from "../Loading/Loading";
 
 export const Home = () => {
@@ -16,6 +17,7 @@ export const Home = () => {
     return (
         <div className="wrapper">
             <div className="flexcont">
+                <Loading />
                 <CharList />
                 <Char />
             </div>

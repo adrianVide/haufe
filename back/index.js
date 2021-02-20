@@ -23,7 +23,7 @@ try {
 //Middleware
 app.use(
     cors({
-        origin: "http://localhost:3003", // <-- location of the react app were connecting to
+        origin: "http://localhost:3000", 
         credentials: true,
     })
 );
@@ -34,7 +34,6 @@ app.get('/', async (req, res, next) => {
         axios.get('https://rickandmortyapi.com/api/character')
             .then((response) => {
                 console.log('API called')
-                console.log(response.data.results)
                 console.log(typeof response.data.results)
                 res.send(response.data.results)
             })
