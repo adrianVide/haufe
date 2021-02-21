@@ -60,19 +60,19 @@ app.use(cookieParser("rickmorty"));
 
 
 
-function isAuthenticated() {
-    console.log('auth')
-    passport.authenticate("local", (err, user, info) => {
-        if (err) throw err;
-        if (!user) res.send("No User");
-        else {
-            req.logIn(user, (err) => {
-                if (err) throw err;
-                next()
-            });
-        }
-    })
-}
+// function isAuthenticated() {
+//     console.log('auth')
+//     passport.authenticate("local", (err, user, info) => {
+//         if (err) throw err;
+//         if (!user) res.send("No User");
+//         else {
+//             req.logIn(user, (err) => {
+//                 if (err) throw err;
+//                 next()
+//             });
+//         }
+//     })
+// }
 
 
 
@@ -92,17 +92,17 @@ function isAuthenticated() {
 //     }
 // });
 
-function checkAuth(req, res, next) {
-    console.log('authF', req.isAuthenticated())
-    if (req.isAuthenticated()) {
-        next();
-    } else {
-        res.status(401).send({
-            result: false,
-            message: "Failed Authentication.",
-        });
-    }
-}
+// function checkAuth(req, res, next) {
+//     console.log('authF', req.isAuthenticated())
+//     if (req.isAuthenticated()) {
+//         next();
+//     } else {
+//         res.status(401).send({
+//             result: false,
+//             message: "Failed Authentication.",
+//         });
+//     }
+// }
 
 
 
@@ -181,7 +181,15 @@ app.get("/fav", (req, res) => {
     
 });
 
+app.post("/delfav/:id", async (req, res, next) => {
+    const theUser = await User.findById(req.body.id);
+    await User.findByIdAndUpdate(theUser, { $pull: { favourites: req.body.char + '' } });
+  });
 
+app.post("/addfav/:id", async (req, res, next) => {
+    const theUser = await User.findById(req.body.id);
+    await User.findByIdAndUpdate(theUser, { $push: { favourites: req.body.char + '' } });
+  });
 
 
 app.get("/user", (req, res) => {
