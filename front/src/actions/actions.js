@@ -30,7 +30,11 @@ export const charListError = (error) => {
 export const charListFetchAsync = () => async (dispatch) => {
   dispatch(charListStart());
   try {
-    const resp = await axios.get("http://localhost:3003/");
+    const resp = await axios({
+      method: "GET",
+      withCredentials: true,
+      url: "http://localhost:3001/char",
+    });
     dispatch(charListSuccess(resp.data));
   } catch (e) {
     dispatch(charListError(e.message));

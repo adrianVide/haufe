@@ -11,7 +11,7 @@ export const Loading = () => {
       {loading ? (
         <>
           <div className="lds-ripple">
-            Loding
+            Loading
             <div></div>
             <div></div>
           </div>

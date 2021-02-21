@@ -9,10 +9,10 @@ import { Loading } from "../Loading/Loading";
 export const Home = () => {
     const dispatch = useDispatch();
 
-    //Trigger the data fetch on first load
-    useEffect(() => {
-        dispatch({ type: "CHAR_LIST_START" });
-    }, [dispatch]);
+    // Trigger the data fetch on first load
+    // useEffect(() => {
+    //     dispatch({ type: "CHAR_LIST_START" });
+    // }, [dispatch]);
 
     return (
         <div className="wrapper">

@@ -4,7 +4,7 @@ import axios from "axios";
 //worker function
 export function* workerFetchChars() {
   try {
-    const resp = yield call(axios.get, "http://localhost:3001/");
+    const resp = yield call(axios.get, "http://localhost:3001/char");
     yield put({ type: "CHAR_LIST_SUCCESS", payload: { chars: resp.data } });
   } catch (error) {
     yield put({
