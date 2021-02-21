@@ -1,0 +1,53 @@
+.choose {
+    text-align: center;
+    color: white;
+  }
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: 1em;
+    text-align: center;
+    line-height: 17px;
+    border-radius: 10px;
+    background-color: lightgrey;
+  
+  }
+  
+  .price {
+    color: grey;     
+    font-size: 22px;
+  }
+  
+  .desc {
+    padding: 0em 0.5em;
+    color: white;
+  }
+  .card button:hover {
+    opacity: 0.7;
+  }
+  
+  .specs-container {
+    padding: 0em 0em 1em 1em;
+    text-align: left;
+  }
+  .specs {
+    color: gray;
+    justify-content: left;
+    display: flex;
+    align-items: center;
+  }
+  
+  img {
+    width: 100%;
+    border-radius: 10px 10px 20px 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  @media screen and (max-width: 600px) {
+    .card {
+      max-width: 100%;
+    }
+    img {
+      width: 100%;
+    }
+  }

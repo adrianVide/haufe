@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 import { useSelector } from "react-redux";
-// import "./Phone.css";
+import "./Char.css";
 
 export const Char = () => {
     //Get char from state depending on button from CharList
     const char = useSelector((state) => state.char);
     //Get loading state for showing spinner or not
-
-
     const loading = useSelector((state) => state.loading);
     let favManager = char => console.log(char.id);
+    useEffect(async() => {
+        console.log(char.id)
+        const isFav = await axios({
+            method: "GET",
+            withCredentials: true,
+            url: "http://localhost:3001/fav",
+        });
+        console.log(await isFav)
+    })
     //Function to send a post/put request to back for favChars onClick
 
 
@@ -49,7 +57,7 @@ export const Char = () => {
                 : loading ? (
                     <h1 className="choose">Loading ...</h1>
                 ) : (
-                        <h1 className="choose">Choose your char</h1>
+                        <h1 className="choose">Choose your fighter</h1>
                     )
             }
         </>

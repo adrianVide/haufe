@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { charSelected } from "../../actions/actions";
 import axios from "axios";
 
-// import "./PhoneList.css";
+import "./CharList.css";
 
 export const CharList = () => {
   const dispatch = useDispatch();
@@ -21,37 +21,33 @@ export const CharList = () => {
       withCredentials: true,
       url: "http://localhost:3001/user",
     });
-    console.log(await isAuth.data)
-    if (await isAuth.data) {
-          dispatch({ type: "CHAR_LIST_START" });
-    } 
-    
+    if (isAuth.data) {
+      dispatch({ type: "CHAR_LIST_START" });
+    }
 
-    
+
+
     console.log('not auth')
   }
 
 
   return (
-    <div>   <button
-    onClick={dispatchAuth}
-      
-    >LIST</button>
-      <div className="list">
+    <ul>   
+     
         {chars.map((char) => {
           return (
 
-            <div key={char.id} data-testid={char.id}>
+            <li key={char.id} data-testid={char.id}>
               <button
                 onClick={() => singleChar(char.id)}
                 className="list-button"
               >
                 <h2>{char.name}</h2>
               </button>
-            </div>
+            </li>
           );
         })}
-      </div>
-    </div>
+    
+    </ul>
   );
 };

@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 // import * as serviceWorker from "./serviceWorker";
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Route } from 'react-router-dom'
 import { Provider } from "react-redux";
 import { Home } from "./components/Home/Home";
 import { User } from "./components/User/User";
@@ -9,13 +10,16 @@ import store from "./storeConf";
 import './index.css';
 
 ReactDOM.render(
+  <BrowserRouter>
   <React.StrictMode>
     <Provider store={store}>
-      <User />
+      <Route exact path='/' component={User} />
+      <Route exact path='/protected' component={Home} />
 
-      <Home />
-    </Provider>
-  </React.StrictMode>,
+    </Provider> 
+  </React.StrictMode>
+ </BrowserRouter>  
+  ,
   document.getElementById('root')
 );
 

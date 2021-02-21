@@ -1,0 +1,36 @@
+.list {
+  }
+  ul {
+      width: 60%;
+      columns: 2;
+  }
+  li {
+      min-width: 400px;
+  }
+  .list-button {
+    background-color: white;
+    border-radius: 10px;
+    border: 0px solid grey;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    color: grey;
+    font-size: 10px;
+    padding: 0px 0px;
+    text-decoration: none;
+    margin: 0px 0px 5px 0px;
+    min-width: 300px;
+    outline: none;
+  }
+  .list-button:hover {
+    background-color: #dfdfdf;
+    color: white;
+  }
+  .list-button:active {
+    position: relative;
+    top: 2px;
+  }
+  
+  .list-button:focus {
+      color: rgb(65, 65, 65);
+      background-color: lightgray;
+  }

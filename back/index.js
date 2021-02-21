@@ -125,18 +125,12 @@ app.get('/char/:id', async (req, res, next) => {
 })
 
 
-// app.get('/char', checkAuth, (req, res, next) => {
-//     axios.get(`https://rickandmortyapi.com/api/character/`)
-//             .then((response) => {
-//                 res.send(response.data.results);
-//             })
-// });
-
-
-
-
-
-
+app.get('/char', (req, res, next) => {
+    axios.get(`https://rickandmortyapi.com/api/character/`)
+        .then((response) => {
+            res.send(response.data.results);
+        })
+});
 
 
 app.post('/login', (req, res, next) => {
@@ -154,6 +148,7 @@ app.post('/login', (req, res, next) => {
         }
     })(req, res, next);
 });
+
 app.post("/register", (req, res) => {
     User.findOne({ username: req.body.username }, async (err, doc) => {
         if (err) throw err;
@@ -171,21 +166,26 @@ app.post("/register", (req, res) => {
     });
 });
 
-app.get("/char", (req, res) => {
-    axios.get(`https://rickandmortyapi.com/api/character/`)
-        .then((response) => {
-            res.send(response.data.results);
-        })
-        
-   
+// app.get("/char", (req, res) => {
+//     axios.get(`https://rickandmortyapi.com/api/character/`)
+//         .then((response) => new Promise(resolve => {
+//             setTimeout(() => {
+//                 res.send(response.data.results);
+//             }, 2000);
+//         }))
+// });
+
+
+app.get("/fav", (req, res) => {            
+    res.send(req.user);
     
 });
 
 
-app.get("/user", (req, res) => {
-    
-    res.send(req.user); 
 
+
+app.get("/user", (req, res) => {
+    res.send(req.user);
 });
 
 //Create server
