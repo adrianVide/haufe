@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import Axios from "axios";
+import "./User.css";
+
 
 export const User = () => {
   const [registerUsername, setRegisterUsername] = useState("");
@@ -28,6 +31,7 @@ export const User = () => {
       withCredentials: true,
       url: "http://localhost:3001/login",
     }).then((res) => console.log(res));
+    getUser()
   };
   const getUser = () => {
     Axios({
@@ -40,39 +44,43 @@ export const User = () => {
     });
   };
   return (
-    <div className="App">
-      <div>
-        <h1>Register</h1>
-        <input
-          id="username" type="text" name="username"
-          placeholder="username"
-          onChange={(e) => setRegisterUsername(e.target.value)}
-        />
-        <input
-          placeholder="password"
-          onChange={(e) => setRegisterPassword(e.target.value)}
-        />
-        <button onClick={register}>Submit</button>
+    <div id='user'>
+      <div className='container'>
+        <div>
+          <div>
+            <h1>Register</h1>
+            <input
+              id="username" type="text" name="username"
+              placeholder="username"
+              onChange={(e) => setRegisterUsername(e.target.value)}
+            />
+            <input
+              placeholder="password"
+              onChange={(e) => setRegisterPassword(e.target.value)}
+            />
+            <button onClick={register}>Register</button>
+          </div>
+
+          <div>
+            <h1>Login</h1>
+            <input
+              placeholder="username"
+              onChange={(e) => setLoginUsername(e.target.value)}
+            />
+            <input
+              placeholder="password"
+              onChange={(e) => setLoginPassword(e.target.value)}
+            />
+            <button onClick={login}>Login</button>
+          </div>
+        </div>
+
+        <div>
+          {data ? <> <h1>You are logged in as {data.username}</h1> <Link to="/protected"><button>Come in!</button></Link> </> : null}
+        </div>
       </div>
 
-      <div>
-        <h1>Login</h1>
-        <input
-          placeholder="username"
-          onChange={(e) => setLoginUsername(e.target.value)}
-        />
-        <input
-          placeholder="password"
-          onChange={(e) => setLoginPassword(e.target.value)}
-        />
-        <button onClick={login}>Submit</button>
-      </div>
 
-      <div>
-        <h1>Get User</h1>
-        <button onClick={getUser}>Submit</button>
-        {data ? <h1>Welcome Back {data.username}</h1> : null}
-      </div>
     </div>
   );
 }

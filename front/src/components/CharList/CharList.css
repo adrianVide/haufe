@@ -2,28 +2,30 @@
   }
   ul {
       width: 60%;
+      list-style-type: none;
       columns: 2;
   }
   li {
       min-width: 400px;
   }
   .list-button {
-    background-color: white;
+    background-color: #62cf27;
     border-radius: 10px;
     border: 0px solid grey;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     display: inline-block;
-    color: grey;
+    color: white;
     font-size: 10px;
     padding: 0px 0px;
     text-decoration: none;
     margin: 0px 0px 5px 0px;
     min-width: 300px;
     outline: none;
+    transition: .5s;
   }
   .list-button:hover {
-    background-color: #dfdfdf;
-    color: white;
+    background-color: #70f745;
+    color: #949494;
   }
   .list-button:active {
     position: relative;
@@ -31,6 +33,6 @@
   }
   
   .list-button:focus {
-      color: rgb(65, 65, 65);
-      background-color: lightgray;
+      color: #70f745;
+      background-color: #383838;
   }

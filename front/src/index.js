@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 // import * as serviceWorker from "./serviceWorker";
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Provider } from "react-redux";
+import { NotFound } from "./components/NotFound/NotFound";
 import { Home } from "./components/Home/Home";
 import { User } from "./components/User/User";
 import store from "./storeConf";
@@ -11,14 +12,17 @@ import './index.css';
 
 ReactDOM.render(
   <BrowserRouter>
-  <React.StrictMode>
-    <Provider store={store}>
-      <Route exact path='/' component={User} />
-      <Route exact path='/protected' component={Home} />
+    <React.StrictMode>
+      <Provider store={store}>
+        <Switch>
+          <Route exact path='/' component={User} />
+          <Route exact path='/protected' component={Home} />
+          <Route component={NotFound} />
+        </Switch>
 
-    </Provider> 
-  </React.StrictMode>
- </BrowserRouter>  
+      </Provider>
+    </React.StrictMode>
+  </BrowserRouter>
   ,
   document.getElementById('root')
 );

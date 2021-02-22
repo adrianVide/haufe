@@ -25,7 +25,7 @@ export const Char = () => {
             setFav(true)
             :
             setFav(false)
-    }, [fav]);
+    });
 
     //Function to delete from fav array onClick
     const delFav = async (char) => {
@@ -38,8 +38,8 @@ export const Char = () => {
             char: char.id,
             username: theUser.data.username,
             id: theUser.data.id
-          })
-          setFav(false)
+        })
+        setFav(false)
 
     };
     //Function to add from fav array onClick
@@ -53,8 +53,8 @@ export const Char = () => {
             char: char.id,
             username: theUser.data.username,
             id: theUser.data.id
-          })
-          setFav(true)
+        })
+        setFav(true)
 
     };
 
@@ -64,43 +64,21 @@ export const Char = () => {
             {Object.keys(char).length !== 0 ?
                 (
                     <div className="card">
-                        <img
+                        <img className='charimg'
                             src={char.image}
                             alt={char.name}
                         />
-                        <p className="brand">{char.manufacturer}</p>
+                        <p>{char.status}</p>
                         <h1>{char.name}</h1>
-                        <p className="price">{char.price} €</p>
-                        <p className="desc">{char.description}</p>
-                        <div className="specs-container">
-                            <div className="specs">
-                                <i className="material-icons md-18"></i>
-                                {char.screen}
-                            </div>
-                            <div className="specs">
-                                <i className="material-icons md-18"></i>
-                                {char.processor}
-                            </div>
-                            <div className="specs">
-                                <i className="material-icons md-18"></i>
-                                {fav ? (
-                                    <button
-                                        onClick={() => delFav(char)}
-                                    >
-                                        In your wishlist
-                                 
-                                    </button>
-                                ) : (
-                                    <button
-                                        onClick={() => addFav(char)}
-                                    >
-                                        Add it to your wishlist
-                                    
-                                    </button>
-                                    )}
+                        <p className="species">{char.species}</p>
 
-                            </div>
-                        </div>
+                        {fav ? (<img onClick={() => delFav(char)} class='heart' src='/1977483.png' />
+
+                        ) : (
+                                <img onClick={() => addFav(char)} class='heart' src='/1977245.png' />
+
+                            )}
+
                     </div>
                 )
                 : loading ? (
