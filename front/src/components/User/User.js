@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Axios from "axios";
 import "./User.css";
@@ -10,6 +10,9 @@ export const User = () => {
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [data, setData] = useState(null);
+  useEffect(() => {
+    getUser()
+  })
   const register = () => {
     Axios({
       method: "POST",
@@ -76,7 +79,7 @@ export const User = () => {
         </div>
 
         <div>
-          {data ? <> <h1>You are logged in as {data.username}</h1> <Link to="/protected"><button>Come in!</button></Link> </> : null}
+          {data ? <> <h1>You are logged in as {data.username}</h1> <Link to="/protected"><button>Come in!</button></Link> </> : <h1>You are not logged in</h1>}
         </div>
       </div>
 
