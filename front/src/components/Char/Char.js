@@ -63,7 +63,7 @@ export const Char = () => {
         <>
             {Object.keys(char).length !== 0 ?
                 (
-                    <div className="card">
+                    <div className="card" data-testid='char'>
                         <img className='charimg'
                             src={char.image}
                             alt={char.name}

@@ -32,7 +32,7 @@ export const CharList = () => {
 
 
   return (
-    <ul>   
+    <ul data-testid="list-group">   
      
         {chars.map((char) => {
           return (
