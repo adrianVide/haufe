@@ -22,10 +22,11 @@ export const User = () => {
       },
       withCredentials: true,
       url: "http://localhost:3001/register",
-    }).then((res) => console.log(res));
+    });
   };
-  const login = () => {
-    Axios({
+
+  const login = async () => {
+    await Axios({
       method: "POST",
       data: {
         username: loginUsername,
@@ -33,9 +34,10 @@ export const User = () => {
       },
       withCredentials: true,
       url: "http://localhost:3001/login",
-    }).then((res) => console.log(res));
-    getUser()
+    });
+    await getUser()
   };
+
   const getUser = () => {
     Axios({
       method: "GET",
@@ -43,7 +45,6 @@ export const User = () => {
       url: "http://localhost:3001/user",
     }).then((res) => {
       setData(res.data);
-      console.log(res.data);
     });
   };
   return (

@@ -9,21 +9,15 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const passport = require("passport");
-const connectEnsureLogin = require('connect-ensure-login');
-const passportLocal = require("passport-local").Strategy;
 require("./middleware/passportConf")(passport);
 
 
-
-
-
-
+//Consts
 const port = 3001
 const db = "mongodb://localhost/haufe";
 
 
 //MongoDB connection
-
 mongoose.connect(
     db,
     {
@@ -36,7 +30,6 @@ mongoose.connect(
 );
 
 
-
 //Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -46,7 +39,6 @@ app.use(
         credentials: true,
     })
 );
-
 app.use(
     session({
         secret: "rickmorty",
@@ -59,59 +51,7 @@ app.use(passport.session());
 app.use(cookieParser("rickmorty"));
 
 
-
-// function isAuthenticated() {
-//     console.log('auth')
-//     passport.authenticate("local", (err, user, info) => {
-//         if (err) throw err;
-//         if (!user) res.send("No User");
-//         else {
-//             req.logIn(user, (err) => {
-//                 if (err) throw err;
-//                 next()
-//             });
-//         }
-//     })
-// }
-
-
-
-
 //Routes
-// app.get('/char', isAuthenticated, async (req, res, next) => {
-
-
-
-//     try {
-//         axios.get('https://rickandmortyapi.com/api/character')
-//             .then((response) => {
-//                 res.send(response.data.results)
-//             })
-//     } catch (err) {
-//         console.log(err)
-//     }
-// });
-
-// function checkAuth(req, res, next) {
-//     console.log('authF', req.isAuthenticated())
-//     if (req.isAuthenticated()) {
-//         next();
-//     } else {
-//         res.status(401).send({
-//             result: false,
-//             message: "Failed Authentication.",
-//         });
-//     }
-// }
-
-
-
-
-
-
-
-
-
 app.get('/char/:id', async (req, res, next) => {
     try {
         axios.get(`https://rickandmortyapi.com/api/character/${req.params.id}`)
@@ -121,29 +61,16 @@ app.get('/char/:id', async (req, res, next) => {
     } catch (error) {
         console.log(error)
     }
-
 })
-
-
-// app.get('/char', (req, res, next) => {
-//     axios.get(`https://rickandmortyapi.com/api/character/`)
-//         .then((response) => {
-//             res.send(response.data.results);
-//         })
-// });
-
 
 app.post('/login', (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
-
         if (err) throw err;
         if (!user) res.send("No User");
         else {
             req.logIn(user, (err) => {
-                console.log('aqui', user)
                 if (err) throw err;
                 res.send("Successfully Authenticated");
-                console.log(req.user);
             });
         }
     })(req, res, next);
@@ -155,7 +82,6 @@ app.post("/register", (req, res) => {
         if (doc) res.send("User Already Exists");
         if (!doc) {
             const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
             const newUser = new User({
                 username: req.body.username,
                 password: hashedPassword,
@@ -175,26 +101,25 @@ app.get("/char", (req, res) => {
         }))
 });
 
-
-app.get("/fav", (req, res) => {            
+app.get("/fav", (req, res) => {
     res.send(req.user);
-    
+
 });
 
 app.post("/delfav/:id", async (req, res, next) => {
     const theUser = await User.findById(req.body.id);
     await User.findByIdAndUpdate(theUser, { $pull: { favourites: req.body.char + '' } });
-  });
+});
 
 app.post("/addfav/:id", async (req, res, next) => {
     const theUser = await User.findById(req.body.id);
     await User.findByIdAndUpdate(theUser, { $push: { favourites: req.body.char + '' } });
-  });
-
+});
 
 app.get("/user", (req, res) => {
     res.send(req.user);
 });
+
 
 //Create server
 app.listen(port, () => {
